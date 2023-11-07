@@ -104,9 +104,9 @@ userSchema.pre("save", function (next) {
     if (this.isModified("rank")) {
         if (["Comandante", "Teniente Coronel"].includes(this.rank)) {
             this.role = "Authority";
-        } else if (["Sargento", "Cabo", "Cabo Primero", "Brigada"].includes(this.rank)) {
+        } else if (["Cabo Primero","Sargento","Sargento Primero", "Brigada"].includes(this.rank)) {
             this.role = "Manager";
-        } else if (["Subteniente", "Teniente", "Capitán"].includes(this.rank)) {
+        } else if (["Subteniente", "Teniente", "Capitan"].includes(this.rank)) {
             this.role = "Command";
         } else {
             this.role = "User";
