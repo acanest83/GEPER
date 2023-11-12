@@ -1,5 +1,4 @@
 const User = require('../models/user.model');
-const bcryptjs = require('bcryptjs');
 
 //REGISTER//
 module.exports.create = (req, res, next) => {
@@ -10,8 +9,6 @@ module.exports.create = (req, res, next) => {
       if (existingUser) {
         return res.status(400).json({ message: 'User with the same email already exists' });
       }
-
-  
           const newUser = new User({
             name,
             tim,

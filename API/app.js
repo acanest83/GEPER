@@ -9,6 +9,8 @@ require("./config/db.config");
 const session = require("./config/session.config");
 
 const app = express();
+const cors = require("./config/cors.config");
+app.use(cors);
 app.use(express.json());
 app.use(logger("dev"));
 app.use(session.session);
@@ -18,7 +20,6 @@ app.use("/v1", api);
 
 app.use((req, res, next) => next(createError(400, {
     errors: {
-     
     }
 })));
 

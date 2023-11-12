@@ -22,18 +22,18 @@ const userSchema = new Schema(
             type: String,
             trim: true,
             enum: [
-                "Soldado", 
-                "Cabo", 
+                "Soldado",
+                "Cabo",
                 "Cabo Primero",
-                 "Sargento",
-                 "Sargento Primero",
-                 "Brigada",
-                 "Subteniente",
-                 "Teniente",
-                 "Capitan",
-                 "Comandante",
-                 "Teniente Coronel"
-                ],
+                "Sargento",
+                "Sargento Primero",
+                "Brigada",
+                "Subteniente",
+                "Teniente",
+                "Capitan",
+                "Comandante",
+                "Teniente Coronel"
+            ],
             required: "Rank is required",
         },
         surname: {
@@ -104,7 +104,7 @@ userSchema.pre("save", function (next) {
     if (this.isModified("rank")) {
         if (["Comandante", "Teniente Coronel"].includes(this.rank)) {
             this.role = "Authority";
-        } else if (["Cabo Primero","Sargento","Sargento Primero", "Brigada"].includes(this.rank)) {
+        } else if (["Cabo Primero", "Sargento", "Sargento Primero", "Brigada"].includes(this.rank)) {
             this.role = "Manager";
         } else if (["Subteniente", "Teniente", "Capitan"].includes(this.rank)) {
             this.role = "Command";

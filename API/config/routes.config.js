@@ -7,7 +7,7 @@ const auth = require("../Middleware/auth.middleware");
 
 //REQUEST ROUTES//
 router.get ("/requests", requests.list);
-router.post("/requests", requests.create);
+router.post("/requests/create", requests.create);
 router.put ("/requests/:id/approve", requests.approve);
 router.put ("/requests/:id/denied", requests.denied);
 router.put ("/requests/:id/cancel", requests.cancel);

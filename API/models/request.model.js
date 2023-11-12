@@ -100,16 +100,3 @@ const requestSchema = new Schema(
 
 const Request = mongoose.model("Request", requestSchema);
 module.exports = Request;
-
-
-
-
-
-
-
-
-
-
-
-
-
