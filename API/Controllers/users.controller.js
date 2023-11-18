@@ -3,6 +3,7 @@ const User = require('../models/user.model');
 //REGISTER//
 module.exports.create = (req, res, next) => {
   const { name, tim, rank, surname, telephone, email, role, avatar, password } = req.body;
+ 
 
   User.findOne({ email })
     .then(existingUser => {

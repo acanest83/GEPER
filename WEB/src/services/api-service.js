@@ -3,24 +3,49 @@ import axios from "axios";
 //Conectar con la API//
 const service = axios.create({
     withCredentials: true,
-    baseURL: import.meta.env.REACT_APP_BASE_API_URL || "http://127.0.0.1:3000/v1",
+    baseURL: "http://127.0.0.1:3000/v1",
   });
-//Exportar//
+
+//Exportar RESISTER//
   export function createUser(body) {
-    const formData = new FormData();
-  
-    formData.append("name", body.name);
-    formData.append("tim", body.tim);
-    formData.append("rank",body.rank);
-    formData.append("surname",body.surname);
-    formData.append("telephone",body.telephone);
-    formData.append("email", body.email);
-    formData.append("role",body.role);
-    formData.append("password", body.password);
-  
+    const { name, tim, rank, surname, telephone, email, role, password } = body;
+    const formUser = { name, tim, rank, surname, telephone, email, role, password };
+
     if (body.avatar) {
-      formData.append("avatar", body.avatar[0]);
+      formUser.avatar = body.avatar[0];
     }
   
-    return service.post("/register", formData);
+    return service.post("/register", formUser);   
   }
+
+//Exportar LOGIN//
+  export function login(data) {
+    return service.post("/login", data).then((response) => response.data);
+  }
+
+  export function logoutApi() {
+    return service.post("/logout");
+  }
+
+  //Exportar a RequestCreate//
+  export function sendRequest(body) {
+    const { requestType, name, surname, tim, telephone, rank, email, reasons, periodFrom, periodTo } = body;
+    const formRequest = { requestType, name, surname, tim, telephone, rank, email, reasons, periodFrom, periodTo};
+  
+    return service.post("/requests/create", formRequest);
+  }
+  //Exportar a Home//
+export function goHome() {
+  return service.get("/home").then((response) => response.data);
+}
+  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  

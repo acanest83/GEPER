@@ -1,1 +1,9 @@
+body {
+  background-image: url("background pixelado.jpg"); 
+  background-size: cover;
+  background-position: center;
+  margin: 0; 
+  padding: 0;
+  height: 100vh; 
+}
 

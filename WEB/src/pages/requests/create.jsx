@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
+import { sendRequest } from '../../services/api-service';
 
 function Create() {
     const [requestType, setRequestType] = useState('');
     const [reason, setReason] = useState('');
+    const [periodFrom, setPeriodFrom] = useState('');
+    const [periodTo, setPeriodTo] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [tim, setTim] = useState('');
+    const [telephone, setTelephone] = useState('');
+    const [rank, setRank] = useState('');
+    const [email, setEmail] = useState('');
+    const [submitMessage, setSubmitMessage] = useState('');
+
+    const [hover, setHover] = useState(false);
 
     const handleRequestTypeChange = (e) => {
         setRequestType(e.target.value);
@@ -49,15 +61,45 @@ function Create() {
         setPeriodTo(e.target.value);
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formRequest = {
+            requestType,
+            name,
+            surname,
+            tim,
+            telephone,
+            rank,
+            email,
+            reason,
+            periodFrom,
+            periodTo,
+        };
+        sendRequest(formRequest)
+            .then(response => {
+                setSubmitMessage('Solicitud enviada con éxito:', response.data);
+            })
+            .catch(error => {
+                setSubmitMessage('Error al enviar la solicitud:', error);
+            });
+    };
+
     return (
         <div className="card">
             <div className="card-body">
-                <h5 className="card-title">Leave Request</h5>
-                <form>
+                <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold" }}>Leave Request</h5>
+                <form onSubmit={handleSubmit}>
                     {/* Request Type */}
                     <div className="mb-3">
-                        <label className="form-label">Request Type</label>
-                        <select className="form-select" onChange={handleRequestTypeChange} value={requestType} required>
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Request Type</label>
+                        <select
+                            className="form-select"
+                            onChange={handleRequestTypeChange}
+                            value={requestType}
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required
+                        >
                             <option value="">Nobody</option>
                             <option value="holidays">Holidays & Leave</option>
                             <option value="medical">Medical Leave</option>
@@ -67,16 +109,54 @@ function Create() {
 
                     {/* Information */}
                     <div className="mb-3">
-                        <label className="form-label">Name</label>
-                        <input type="text" className="form-control" required />
-                        <label className="form-label">Surname</label>
-                        <input type="text" className="form-control" required />
-                        <label className="form-label">TIM</label>
-                        <input type="text" className="form-control" required />
-                        <label className="form-label">Telephone</label>
-                        <input type="text" className="form-control" required />
-                        <label className="form-label">Rank</label>
-                        <select className="form-select" id="validationDefault04" required>
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="name"
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required
+                        />
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Surname</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={surname}
+                            onChange={(e) => setSurname(e.target.value)}
+                            placeholder="surname"
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required
+
+                        />
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>TIM</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={tim}
+                            onChange={(e) => setTim(e.target.value)}
+                            placeholder="tim"
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required />
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Telephone Number</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={telephone}
+                            onChange={(e) => setTelephone(e.target.value)}
+                            placeholder="telephone"
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required />
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Rank</label>
+                        <select
+                            className="form-select"
+                            id="validationDefault04"
+                            value={rank}
+                            onChange={(e) => setRank(e.target.value)}
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required
+                        >
                             <option selected disabled value="">Ninguno</option>
                             <option>Teniente Coronel</option>
                             <option>Comandante</option>
@@ -90,13 +170,21 @@ function Create() {
                             <option>Cabo</option>
                             <option>Soldado</option>
                         </select>
-                        <label className="form-label">email</label>
-                        <input type="text" className="form-control" required />
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Email</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            required
+
+                        />
                     </div>
 
                     {/* Reasons */}
                     <div className="mb-3">
-                        <label className="form-label">Reasons</label>
+                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Reasons</label>
 
                         {/* Holidays & Leave Reasons */}
                         {requestType === 'holidays' && (
@@ -137,7 +225,6 @@ function Create() {
                                         onChange={handleReasonChange}
                                         checked={reason === 'official3'}
                                         disabled={official3}
-
                                     />
                                     <label className="form-check-label"
                                         htmlFor="official3">
@@ -173,8 +260,6 @@ function Create() {
                                         onChange={handleReasonChange}
                                         checked={reason === "contingency1"}
                                         disabled={contingency1}
-
-
                                     />
                                     <label className="form-check-label"
                                         htmlFor="contingency">
@@ -303,20 +388,44 @@ function Create() {
                     {/* Periodos */}
                     {reason && (
                         <div className="mb-3">
-                            <label className="form-label">Periodos</label>
+                            <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Periodos</label>
                             <div className="row">
                                 <div className="col">
-                                    <input type="date" className="form-control" onChange={handlePeriodFromChange} required />
+                                    <input type="date"
+                                        className="form-control"
+                                        value={periodFrom}
+                                        onChange={handlePeriodFromChange}
+                                        style={{ borderColor: "#808000", borderWidth: "3px" }}
+                                        required />
                                 </div>
                                 <div className="col">
-                                    <input type="date" className="form-control" onChange={handlePeriodToChange} required />
+                                    <input type="date"
+                                        className="form-control"
+                                        value={periodTo}
+                                        onChange={handlePeriodToChange}
+                                        style={{ borderColor: "#808000", borderWidth: "3px" }}
+                                        required />
                                 </div>
                             </div>
                         </div>
                     )}
 
                     {/* Submit Button */}
-                    <button type="submit" className="btn btn-primary">Solicitar</button>
+                    <button type="submit"
+                        className="btn btn-primary"
+                        style={{
+                            borderColor: "#808000",
+                            borderWidth: "3px",
+                            backgroundColor: hover ? "black" : "olive",
+                            color: hover ? "white" : "white",
+                            fontWeight: "bold",
+                            transition: "background-color 0.3s"
+                        }}
+                        onMouseOver={() => setHover(true)}
+                        onMouseOut={() => setHover(false)}
+                    >
+                        Solicitar
+                    </button>
                 </form>
             </div >
         </div >

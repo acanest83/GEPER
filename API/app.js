@@ -18,11 +18,6 @@ app.use(session.session);
 const api = require("./config/routes.config");
 app.use("/v1", api);
 
-app.use((req, res, next) => next(createError(400, {
-    errors: {
-    }
-})));
-
 app.use((error, req, res, next) => {
 
     if (error instanceof mongoose.Error.ValidationError) {
