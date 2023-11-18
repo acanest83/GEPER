@@ -29,7 +29,7 @@ function Home() {
               <h5 className="card-title">Pending Requests</h5>
               <ul>
                 {data.pendingRequests.map((request) => (
-                  <li key={request._id}>{request.title}</li>
+                  <li key={request._id}>{request.requestType} {request.rank} {request.surname}</li>
                 ))}
               </ul>
             </div>

@@ -29,8 +29,8 @@ const service = axios.create({
 
   //Exportar a RequestCreate//
   export function sendRequest(body) {
-    const { requestType, name, surname, tim, telephone, rank, email, reasons, periodFrom, periodTo } = body;
-    const formRequest = { requestType, name, surname, tim, telephone, rank, email, reasons, periodFrom, periodTo};
+    const { requestType, name, surname, tim, telephone, rank, email, reason, periodFrom, periodTo } = body;
+    const formRequest = { requestType, name, surname, tim, telephone, rank, email, reason, periodFrom, periodTo};
   
     return service.post("/requests/create", formRequest);
   }

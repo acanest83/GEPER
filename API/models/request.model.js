@@ -52,12 +52,12 @@ const requestSchema = new Schema(
                             "Descanso Obligatorio", "Día Adicional", "Día por preparación"
                         ];
                         return validReasons.includes(reasons);
-                    } else if (this.requestTypes === "Medical Leave") {
+                    } else if (this.requestType === "Medical Leave") {
                         const validReasons = [
                             "Contingencia Común", "Contingencia Profesional", "Continuidad de baja", "Día de Recuperación"
                         ];
                         return validReasons.includes(reasons);
-                    } else if (this.requestTypes === "Falily Welfare") {
+                    } else if (this.requestType === "Falily Welfare") {
                         const validReasons = [
                             "Flexibilidad Horaria", "Hijo menor de 3 años", "Hijo menor de 8 años", "hijo menor de 12 años"
                         ];

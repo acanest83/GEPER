@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { sendRequest } from '../../services/api-service';
 
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 function Create() {
     const [requestType, setRequestType] = useState('');
     const [reason, setReason] = useState('');
@@ -65,24 +73,26 @@ function Create() {
         e.preventDefault();
 
         const formRequest = {
-            requestType,
-            name,
-            surname,
-            tim,
-            telephone,
-            rank,
-            email,
-            reason,
-            periodFrom,
-            periodTo,
+            requestType: "Holidays and Leave",
+            name: name,
+            surname: surname,
+            tim: tim,
+            telephone: telephone,
+            rank: rank,
+            email: email,
+            reason: reason,
+            periodFrom: formatDate(periodFrom),
+            periodTo:formatDate(periodTo),
         };
-        sendRequest(formRequest)
-            .then(response => {
-                setSubmitMessage('Solicitud enviada con éxito:', response.data);
-            })
-            .catch(error => {
-                setSubmitMessage('Error al enviar la solicitud:', error);
-            });
+        console.log('Solicitud:', formRequest);
+        try {
+            const response = await sendRequest(formRequest);
+            setSubmitMessage('Solicitud enviada con éxito:', response.data);
+        } catch (error) {
+            console.error('Error al enviar la solicitud:', error);
+            console.log('Respuesta del servidor:', error.response);
+            setSubmitMessage('Error al enviar la solicitud:', error.message || 'Error desconocido');
+        }
     };
 
     return (
