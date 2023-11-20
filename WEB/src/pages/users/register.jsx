@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createUser } from '../../services/api-service';
-import { Link } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 function Register() {
   const [hover, setHover] = useState(false);
@@ -47,19 +47,17 @@ function Register() {
   };
 
   if (registrationSuccess) {
-    return (
-       <Link to="/login">Login</Link>
-    );
+    return  <Navigate to="/login"/>
   }
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '1000px' }}>
-      <div className="card common-form" style={{ width: '800px', border: "8px solid #808000" }}>
+      <div className="card common-form" style={{ width: '800px', border: "8px solid #808000",backgroundColor:"black"}}>
         <div className="card-body">
-          <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold" }}>Register</h5>
-          <form className="row g-3" onSubmit={handleSubmit}>
+          <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold",fontSize:"30px" }}>Register</h5>
+          <form className="row g-3" onSubmit={handleSubmit} style={{ marginTop: '15px'}}>
             <div className="col-md-6">
-              <label htmlFor="validationDefault01" className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>
+              <label htmlFor="validationDefault01" className="form-label" style={{ color: "#808000", fontWeight: "bold"}}>
                 Name
               </label>
               <input
@@ -231,7 +229,8 @@ function Register() {
                   backgroundColor: hover ? "black" : "olive",
                   color: hover ? "white" : "white",
                   fontWeight: "bold",
-                  transition: "background-color 0.3s"
+                  transition: "background-color 0.3s",
+                  marginTop:"25px",
                 }}
                 onMouseOver={() => setHover(true)}
                 onMouseOut={() => setHover(false)}

@@ -49,17 +49,17 @@ const requestSchema = new Schema(
                     if (this.requestType === "Holidays and Leave") {
                         const validReasons = [
                             "Permiso Oficial", "Asuntos Propios",
-                            "Descanso Obligatorio", "Día Adicional", "Día por preparación"
+                            "Descanso Obligatorio", "Dia Adicional", "Dia por preparacion"
                         ];
                         return validReasons.includes(reasons);
                     } else if (this.requestType === "Medical Leave") {
                         const validReasons = [
-                            "Contingencia Común", "Contingencia Profesional", "Continuidad de baja", "Día de Recuperación"
+                            "Contingencia Comun", "Contingencia Profesional", "Continuidad de baja", "Dia de Recuperacion"
                         ];
                         return validReasons.includes(reasons);
                     } else if (this.requestType === "Falily Welfare") {
                         const validReasons = [
-                            "Flexibilidad Horaria", "Hijo menor de 3 años", "Hijo menor de 8 años", "hijo menor de 12 años"
+                            "Flexibilidad Horaria", "Hijo menor de 3 años", "Hijo menor de 8 años", "Hijo menor de 12 años"
                         ];
                         return validReasons.includes(reasons);
                     }
@@ -68,10 +68,10 @@ const requestSchema = new Schema(
                 message: "Invalid reasons for the selected request type.",
             }
         },
-        startDate: {
+        periodFrom: {
             type: Date,
         },
-        endDate: {
+        periodTo: {
             type: Date,
         },
 

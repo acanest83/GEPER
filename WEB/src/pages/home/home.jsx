@@ -20,13 +20,18 @@ function Home() {
 
   return (
     <div className="container mt-4">
-      <h1>Home</h1>
+      <h1 style={{ color: "Tan", fontWeight: "bold"}}>Work Space</h1>
       <>
         <div>
-          <h2>Pending Requests</h2>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Pending Requests</h5>
+          <h2
+            style={{ color: "Tan", fontWeight: "bold", paddingTop: "40px", paddingBottom: "20px" }}
+          >
+            Pending Requests
+          </h2>
+
+          <div className="card" style= {{border: "5px solid #808000",backgroundColor:"black", color :"Tan"}}>
+            <div className="card-body" >
+              <h5 className="card-title" >Pending Requests</h5>
               <ul>
                 {data.pendingRequests.map((request) => (
                   <li key={request._id}>{request.requestType} {request.rank} {request.surname}</li>
@@ -36,12 +41,12 @@ function Home() {
           </div>
         </div>
 
-        <div>
-          <h2>All Users</h2>
+        <div style={{ paddingTop: '40px' }}>
+          <h2 style={{ color: "Tan", fontWeight: "bold" }}>Your Team</h2>
           <div className="row">
             {data.allUsers.map((user) => (
-              <div key={user._id} className="col-md-4 mb-3">
-                <div className="card">
+              <div key={user._id} className="col-md-4 mb-5" >
+                <div className="card" style={{ borderColor: "#808000", borderWidth: "5px",color:"Tan",backgroundColor:"black" }}>
                   <div className="card-body">
                     <h5 className="card-title">
                       {user.name} {user.surname}
@@ -63,15 +68,15 @@ function Home() {
           style={{
             borderColor: "#808000",
             borderWidth: "3px",
-            backgroundColor: hoverHome ? "black" : "olive",
-            color: hoverHome ? "white" : "white",
+            backgroundColor: hoverHome ? "olive" : "black",
+            color: hoverHome ? "White" : "Tan",
             fontWeight: "bold",
             transition: "background-color 0.3s"
           }}
           onMouseOver={() => setHoverHome(true)}
           onMouseOut={() => setHoverHome(false)}
         >
-          Crear Solicitud
+          Create Request
         </Link>
       </>
     </div>

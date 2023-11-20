@@ -50,7 +50,11 @@ module.exports.listApproved = (req, res, next) => {
 
 //PENDINGLIST REQUESTS//
 module.exports.listPending = (req, res, next) => {
+    console.log('Entró en listPending'); // Añadir este registro
     Request.find({ status: "Pending" })
-        .then((pendingRequests) => res.status(200).json(pendingRequests))
+        .then((pendingRequests) => {
+            console.log('Solicitudes Pendientes:', pendingRequests); // Añadir este registro
+            res.status(200).json(pendingRequests);
+        })
         .catch((error) => next(error));
 }

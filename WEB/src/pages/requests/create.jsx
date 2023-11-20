@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { sendRequest } from '../../services/api-service';
+import { Navigate } from "react-router-dom";
 
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -20,9 +21,12 @@ function Create() {
     const [telephone, setTelephone] = useState('');
     const [rank, setRank] = useState('');
     const [email, setEmail] = useState('');
-    const [submitMessage, setSubmitMessage] = useState('');
+    const [requestSuccess, setRequestSuccess] = useState(false);
+    const [requestCancel, setRequestCancel] = useState(false);
+    
 
-    const [hover, setHover] = useState(false);
+    const [hoverOrder, setHoverOrder] = useState(false);
+    const [hoverCancel, setHoverCancel] = useState(false);
 
     const handleRequestTypeChange = (e) => {
         setRequestType(e.target.value);
@@ -45,8 +49,9 @@ function Create() {
 
     const handleReasonChange = (e) => {
         setReason(e.target.value);
-
-        // Reiniciar los estados de las opciones al cambiar las reasons//
+        console.log('Reason:', e.target.value);
+        console.log('State: ', reason);
+        
         setFlexibility(false);
         setChildUnder3(false);
         setChildUnder8(false);
@@ -63,42 +68,59 @@ function Create() {
 
     const handlePeriodFromChange = (e) => {
         setPeriodFrom(e.target.value);
+        console.log('Period From:', e.target.value);
+        console.log('State: ', periodFrom);
     };
 
     const handlePeriodToChange = (e) => {
         setPeriodTo(e.target.value);
+        console.log('Period To:', e.target.value);
+        console.log('State: ', periodTo);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formRequest = {
-            requestType: "Holidays and Leave",
+            requestType: requestType,
             name: name,
             surname: surname,
             tim: tim,
             telephone: telephone,
             rank: rank,
             email: email,
-            reason: reason,
+            reasons: reason,
             periodFrom: formatDate(periodFrom),
-            periodTo:formatDate(periodTo),
+            periodTo: formatDate(periodTo),
         };
         console.log('Solicitud:', formRequest);
         try {
             const response = await sendRequest(formRequest);
-            setSubmitMessage('Solicitud enviada con éxito:', response.data);
+            console.log('Solicitud enviada con éxito:', response.data);
+            setRequestSuccess(true);
+            onFormSubmit(formRequest);
         } catch (error) {
             console.error('Error al enviar la solicitud:', error);
-            console.log('Respuesta del servidor:', error.response);
-            setSubmitMessage('Error al enviar la solicitud:', error.message || 'Error desconocido');
+            console.error('Respuesta del servidor:', error.response.data);
+            console.error('Error al enviar la solicitud:', error.message || 'Error desconocido');
         }
     };
+    const handleCancel = () => {
+        setRequestCancel(true);
+    };
+
+    if (requestSuccess) {
+        return <Navigate to="/home" />;
+    }
+
+    if (requestCancel) {
+        return <Navigate to="/home" />;
+    }
 
     return (
-        <div className="card">
-            <div className="card-body">
-                <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold" }}>Leave Request</h5>
+        <div className="card" style={{ borderColor: "#808000", borderWidth: "5px",marginTop: "150px"}}>
+            <div className="card-body" style={{ backgroundColor: "black" }}>
+                <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold", fontSize: "30px" }}>Leave Request</h5>
                 <form onSubmit={handleSubmit}>
                     {/* Request Type */}
                     <div className="mb-3">
@@ -107,13 +129,13 @@ function Create() {
                             className="form-select"
                             onChange={handleRequestTypeChange}
                             value={requestType}
-                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            style={{ borderColor: "#808000", borderWidth: "7px" }}
                             required
                         >
                             <option value="">Nobody</option>
-                            <option value="holidays">Holidays & Leave</option>
-                            <option value="medical">Medical Leave</option>
-                            <option value="family">Family Welfare</option>
+                            <option value="Holidays and Leave">Holidays & Leave</option>
+                            <option value="Medical Leave">Medical Leave</option>
+                            <option value="Falily Welfare">Falily Welfare</option>
                         </select>
                     </div>
 
@@ -197,19 +219,21 @@ function Create() {
                         <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Reasons</label>
 
                         {/* Holidays & Leave Reasons */}
-                        {requestType === 'holidays' && (
+                        {requestType === 'Holidays and Leave' && (
                             <>
                                 <div className="form-check">
                                     <input type="radio"
                                         className="form-check-input"
                                         id="official1"
-                                        value="official1"
+                                        value="Permiso Oficial"
                                         onChange={handleReasonChange}
-                                        checked={reason === "official1"}
+                                        checked={reason === "Permiso Oficial"}
                                         disabled={official1}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="official">
+                                        htmlFor="official"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Asuntos Propios
                                     </label>
                                 </div>
@@ -217,13 +241,15 @@ function Create() {
                                     <input type="radio"
                                         className="form-check-input"
                                         id="official2"
-                                        value="official2"
+                                        value="Descanso Obligatorio"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'official2'}
+                                        checked={reason === 'Descanso Obligatorio'}
                                         disabled={official2}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="official2">
+                                        htmlFor="official2"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Descanso Obligatorio
                                     </label>
                                 </div>
@@ -231,13 +257,15 @@ function Create() {
                                     <input type="radio"
                                         className="form-check-input"
                                         id="official3"
-                                        value="official3"
+                                        value="Día Adicional"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'official3'}
+                                        checked={reason === 'Dia Adicional'}
                                         disabled={official3}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="official3">
+                                        htmlFor="official3"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Dia Adicional
                                     </label>
                                 </div>
@@ -245,13 +273,15 @@ function Create() {
                                     <input type="radio"
                                         className="form-check-input"
                                         id="official4"
-                                        value="official4"
+                                        value="Dia por preparacion"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'official4'}
+                                        checked={reason === 'Dia por preparacion'}
                                         disabled={official4}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="official4">
+                                        htmlFor="official4"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Dia por Preparación
                                     </label>
 
@@ -260,19 +290,21 @@ function Create() {
                         )}
 
                         {/* Medical Reasons */}
-                        {requestType === 'medical' && (
+                        {requestType === 'Medical Leave' && (
                             <>
                                 <div className="form-check">
                                     <input type="radio"
                                         className="form-check-input"
                                         id="contingency1"
-                                        value="contingency1"
+                                        value="Contingencia Comun"
                                         onChange={handleReasonChange}
-                                        checked={reason === "contingency1"}
+                                        checked={reason === "Contingencia Comun"}
                                         disabled={contingency1}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="contingency">
+                                        htmlFor="contingency"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Contingencia Común
                                     </label>
                                 </div>
@@ -281,14 +313,16 @@ function Create() {
                                     <input type="radio"
                                         className="form-check-input"
                                         id="contingency2"
-                                        value="contingency2"
+                                        value="Contingencia Profesional"
                                         onChange={handleReasonChange}
-                                        checked={reason === "contingency2"}
+                                        checked={reason === "Contingencia Profesional"}
                                         disabled={contingency2}
 
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="contingency">
+                                        htmlFor="contingency"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Contingencia Profesional
                                     </label>
                                 </div>
@@ -297,14 +331,16 @@ function Create() {
                                     <input type="radio"
                                         className="form-check-input"
                                         id="contingency3"
-                                        value="contingency3"
+                                        value="Continuidad de baja"
                                         onChange={handleReasonChange}
-                                        checked={reason === "contingency3"}
+                                        checked={reason === "Continuidad de baja"}
                                         disabled={contingency3}
 
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="contingency">
+                                        htmlFor="contingency"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Continuidad de baja
                                     </label>
                                 </div>
@@ -313,13 +349,15 @@ function Create() {
                                     <input type="radio"
                                         className="form-check-input"
                                         id="contingency4"
-                                        value="contingency4"
+                                        value="Dia de Recuperacion"
                                         onChange={handleReasonChange}
-                                        checked={reason === "contingency4"}
+                                        checked={reason === "Dia de Recuperacion"}
                                         disabled={contingency4}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="contingency">
+                                        htmlFor="contingency"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Día de recuperación
                                     </label>
                                 </div>
@@ -328,20 +366,22 @@ function Create() {
                         )}
 
                         {/* Family Welfare Reasons */}
-                        {requestType === 'family' && (
+                        {requestType === 'Falily Welfare' && (
                             <>
                                 <div className="form-check">
                                     <input
                                         type="radio"
                                         className="form-check-input"
                                         id="flexibility"
-                                        value="flexibility"
+                                        value="Flexibilidad Horaria"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'flexibility'}
+                                        checked={reason === 'Flexibilidad Horaria'}
                                         disabled={flexibility}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="flexibility">
+                                        htmlFor="flexibility"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Flexibilidad horaria
                                     </label>
                                 </div>
@@ -351,13 +391,15 @@ function Create() {
                                         type="radio"
                                         className="form-check-input"
                                         id="childUnder3"
-                                        value="childUnder3"
+                                        value="Hijo menor de 3 años"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'childUnder3'}
+                                        checked={reason === 'Hijo menor de 3 años'}
                                         disabled={childUnder3}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor="childUnder3">
+                                        htmlFor="childUnder3"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Cuidado de hijo menor de 3 años
                                     </label>
                                 </div>
@@ -367,12 +409,14 @@ function Create() {
                                         type="radio"
                                         className="form-check-input"
                                         id="childUnder8"
-                                        value="childUnder8"
+                                        value="Hijo menor de 8 años"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'childUnder8'}
+                                        checked={reason === 'Hijo menor de 8 años'}
                                         disabled={childUnder8}
                                     />
-                                    <label className="form-check-label" htmlFor="childUnder8">
+                                    <label className="form-check-label" htmlFor="childUnder8"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Cuidado de hijo menor de 8 años
                                     </label>
                                 </div>
@@ -382,12 +426,15 @@ function Create() {
                                         type="radio"
                                         className="form-check-input"
                                         id="childUnder12"
-                                        value="childUnder12"
+                                        value="Hijo menor de 12 años"
                                         onChange={handleReasonChange}
-                                        checked={reason === 'childUnder12'}
+                                        checked={reason === 'Hijo menor de 12 años'}
                                         disabled={childUnder12}
                                     />
-                                    <label className="form-check-label" htmlFor="childUnder12">
+                                    <label className="form-check-label"
+                                        htmlFor="childUnder12"
+                                        style={{ color: "#808000", fontWeight: "bold" }}
+                                    >
                                         Cuidado de hijo menor de 12 años
                                     </label>
                                 </div>
@@ -421,21 +468,42 @@ function Create() {
                     )}
 
                     {/* Submit Button */}
-                    <button type="submit"
+                    <button
+                        type="submit"
                         className="btn btn-primary"
                         style={{
                             borderColor: "#808000",
                             borderWidth: "3px",
-                            backgroundColor: hover ? "black" : "olive",
-                            color: hover ? "white" : "white",
+                            backgroundColor: hoverOrder ? "black" : "olive",
+                            color: hoverOrder ? "white" : "white",
                             fontWeight: "bold",
                             transition: "background-color 0.3s"
                         }}
-                        onMouseOver={() => setHover(true)}
-                        onMouseOut={() => setHover(false)}
+                        onMouseOver={() => setHoverOrder(true)}
+                        onMouseOut={() => setHoverOrder(false)}
                     >
-                        Solicitar
+                        Order
                     </button>
+
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={handleCancel}
+                        style={{
+                            borderColor: "#808000",
+                            borderWidth: "3px",
+                            backgroundColor: hoverCancel ? "LightCoral" : "red",
+                            color: hoverCancel ? "white" : "white",
+                            fontWeight: "bold",
+                            marginLeft: "25px",
+                            transition: "background-color 0.3s"
+                        }}
+                        onMouseOver={() => setHoverCancel(true)}
+                        onMouseOut={() => setHoverCancel(false)}
+                    >
+                        Cancel
+                    </button>
+
                 </form>
             </div >
         </div >

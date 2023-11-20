@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { login } from "../../services/api-service";
 import { useAuthContext } from "../../contexts/auth-context";
 import { Link } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ function Login() {
 
   const [hoverAccess, setHoverAccess] = useState(false);
   const [hoverSignUp, setHoverSignUp] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleLogin = () => {
     // Validación simple//
@@ -23,12 +25,16 @@ function Login() {
     // Realiza el inicio de sesión//
     login({ email, password }).then((response) => {
       onLogin(response);
+      setLoginSuccess(true); 
     });
   };
+  if (loginSuccess) {
+    return  <Navigate to="/home"/>
+  }
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: "1000px", borderRadius: "10px" }}>
-      <div className="card" style={{ width: "400px", height: "300px", border: "8px solid #808000" }}>
+      <div className="card" style={{ width: "400px", height: "300px", border: "8px solid #808000",backgroundColor:"black" }}>
         <div className="card-body">
           <h5 className="card-title mb-3" style={{ color: "#808000", fontWeight: "bold" }}>Login</h5>
           <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} >
@@ -67,9 +73,12 @@ function Login() {
                 style={{
                   borderColor: "#808000",
                   borderWidth: "3px",
+                  height: "60px",
                   backgroundColor: hoverAccess ? "black" : "olive",
                   color: hoverAccess ? "white" : "white",
                   fontWeight: "bold",
+                  textAlign: "center",
+                  marginTop: "15px",
                   transition: "background-color 0.3s"
                 }}
                 onMouseOver={() => setHoverAccess(true)}
@@ -84,10 +93,13 @@ function Login() {
                 style={{
                   borderColor: "#808000",
                   borderWidth: "3px",
-                  height: "50px",
+                  height: "60px",
                   backgroundColor: hoverSignUp ? "black" : "olive",
                   color: hoverSignUp ? "white" : "white",
                   fontWeight: "bold",
+                  textAlign: "center",
+                  lineHeight: "38px",
+                  marginTop: "15px",
                   transition: "background-color 0.3s"
                 }}
                 onMouseOver={() => setHoverSignUp(true)}

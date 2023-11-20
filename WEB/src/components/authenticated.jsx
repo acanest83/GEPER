@@ -2,9 +2,9 @@ import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/auth-context";
 
 export function Authenticated({ children }) {
-  const authContext = useAuthContext();
+  const {user} = useAuthContext();
 
-  if (!authContext.user) {
+  if (!user) {
     return <Navigate to="/login" />;
   } else {
     return children;
