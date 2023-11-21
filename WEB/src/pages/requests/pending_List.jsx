@@ -1,8 +1,10 @@
-import { formRequest } from "../../services/api-service";
 import React, { useState, useEffect } from 'react';
+import { Navigate } from "react-router-dom";
+import { formRequest,formApproved } from "../../services/api-service";
 
 function PendingList() {
   const [pendingForms, setPendingForms] = useState([]);
+  const [approvedSuccess, setApprovedSuccess] = useState(false);
 
   const [hoverApproved, setHoverApproved] = useState(false);
   const [hoverDenied, setHoverDenied] = useState(false);
@@ -13,18 +15,32 @@ function PendingList() {
         const forms = await formRequest();
         setPendingForms(forms);
       } catch (error) {
-        // Manejar el error si es necesario
+        console.error('Error al obtener formularios pendientes:', error);
       }
     };
 
     fetchPendingForms();
   }, []);
 
+  const handleFormAction = async (formId, action, comments) => {
+    try {
+      const response = await formApproved(formId, action, comments);
+      console.log('Estado del formulario actualizado con éxito:', response);
+    } catch (error) {
+      console.error('Error al actualizar el estado del formulario:', error.message);
+    }
+    setApprovedSuccess(true);
+  };
+
+  if (approvedSuccess) {
+    return  <Navigate to="/home"/>
+  }
+
   return (
     <div>
       <h2 style={{ color: "Tan", fontWeight: "bold", fontSize: "50px" }}>Formularios Pendientes</h2>
       {pendingForms.length === 0 ? (
-        <p>No hay formularios pendientes.</p>
+        <p style={{ color: "Tan", fontWeight: "bold", fontSize: "30px", padding:"40px", marginLeft:"25px",marginTop:"35px" }}>No forms are pending, good Job!!</p>
       ) : (
         <div>
           {pendingForms.map((form) => (
@@ -170,6 +186,7 @@ function PendingList() {
                   <button
                     type="submit"
                     className="btn btn-primary"
+                    key={form.id}
                     style={{
                       borderColor: "#808000",
                       borderWidth: "3px",
@@ -180,6 +197,7 @@ function PendingList() {
                       fontWeight: "bold",
                       transition: "background-color 0.3s"
                     }}
+                    onClick={() => handleFormAction (form.id, "approved", form.comments)}
                     onMouseOver={() => setHoverApproved(true)}
                     onMouseOut={() => setHoverApproved(false)}
                   >
@@ -213,6 +231,4 @@ function PendingList() {
     </div>
   );
 }
-
-
 export default PendingList;

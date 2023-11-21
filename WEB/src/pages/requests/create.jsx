@@ -98,7 +98,6 @@ function Create() {
             const response = await sendRequest(formRequest);
             console.log('Solicitud enviada con éxito:', response.data);
             setRequestSuccess(true);
-            onFormSubmit(formRequest);
         } catch (error) {
             console.error('Error al enviar la solicitud:', error);
             console.error('Respuesta del servidor:', error.response.data);
@@ -234,7 +233,7 @@ function Create() {
                                         htmlFor="official"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Asuntos Propios
+                                       Own Affairs
                                     </label>
                                 </div>
                                 <div className="form-check">
@@ -250,7 +249,7 @@ function Create() {
                                         htmlFor="official2"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Descanso Obligatorio
+                                        Obligatory Rest
                                     </label>
                                 </div>
                                 <div className="form-check">
@@ -266,7 +265,7 @@ function Create() {
                                         htmlFor="official3"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Dia Adicional
+                                        Additional Day
                                     </label>
                                 </div>
                                 <div className="form-check">
@@ -282,7 +281,7 @@ function Create() {
                                         htmlFor="official4"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Dia por Preparación
+                                       Day by Preparation
                                     </label>
 
                                 </div>
@@ -305,7 +304,7 @@ function Create() {
                                         htmlFor="contingency"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Contingencia Común
+                                       Common Contingency
                                     </label>
                                 </div>
 
@@ -323,7 +322,7 @@ function Create() {
                                         htmlFor="contingency"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Contingencia Profesional
+                                       Occupational Contingency
                                     </label>
                                 </div>
 
@@ -341,10 +340,10 @@ function Create() {
                                         htmlFor="contingency"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Continuidad de baja
+                                        Continuity of Sick Leave
                                     </label>
                                 </div>
-
+                                
                                 <div className="form-check">
                                     <input type="radio"
                                         className="form-check-input"
@@ -358,10 +357,9 @@ function Create() {
                                         htmlFor="contingency"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Día de recuperación
+                                        Recovery Day
                                     </label>
                                 </div>
-
                             </>
                         )}
 
@@ -382,7 +380,7 @@ function Create() {
                                         htmlFor="flexibility"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Flexibilidad horaria
+                                        Flexible Hours
                                     </label>
                                 </div>
 
@@ -400,7 +398,7 @@ function Create() {
                                         htmlFor="childUnder3"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Cuidado de hijo menor de 3 años
+                                        Childcare for children under 3 years.
                                     </label>
                                 </div>
 
@@ -417,7 +415,7 @@ function Create() {
                                     <label className="form-check-label" htmlFor="childUnder8"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Cuidado de hijo menor de 8 años
+                                        Childcare for children under 8 years.
                                     </label>
                                 </div>
 
@@ -435,7 +433,7 @@ function Create() {
                                         htmlFor="childUnder12"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                        Cuidado de hijo menor de 12 años
+                                        Childcare for children under 12 years.
                                     </label>
                                 </div>
                             </>
@@ -445,7 +443,7 @@ function Create() {
                     {/* Periodos */}
                     {reason && (
                         <div className="mb-3">
-                            <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Periodos</label>
+                            <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Periods</label>
                             <div className="row">
                                 <div className="col">
                                     <input type="date"

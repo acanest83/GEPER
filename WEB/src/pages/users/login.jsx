@@ -15,19 +15,18 @@ function Login() {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleLogin = () => {
-    // Validación simple//
     if (!email || !password) {
       setError('Please enter both email and password.');
       return;
     }
-    // Limpia el error si no hay problemas//
     setError('');
-    // Realiza el inicio de sesión//
+
     login({ email, password }).then((response) => {
       onLogin(response);
       setLoginSuccess(true); 
     });
   };
+
   if (loginSuccess) {
     return  <Navigate to="/home"/>
   }

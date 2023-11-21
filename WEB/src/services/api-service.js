@@ -39,8 +39,7 @@ export function goHome() {
   return service.get("/home").then((response) => response.data);
 }
 
-//Exportar formulario desde API//
-
+//Exportar formulario Create//
 export function formRequest() {
   return service.get("/requests/pending")
     .then((response) => response.data)
@@ -50,7 +49,25 @@ export function formRequest() {
     });
 }
 
-
+//Exportar Approve desde Create//
+export function formApproved(formId, action, comments) {
+  return service.put(`/requests/${formId}/approve`, {
+    action,
+    comments,
+  })
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+}
+//Exportar Approved //
+export function getApprovedRequests() {
+  return service.get('/requests/approved')
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+}
 
 
 

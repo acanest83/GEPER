@@ -62,6 +62,12 @@ function NavBar() {
           Pending Requests
         </a>
       </li>
+      <li className="nav-item" >
+        <a className="nav-link active" aria-current="page" href="/requests/approved"
+          style={{ fontSize: '23px', padding: "20px", color: " #808000" }}>
+          Approve Request
+        </a>
+      </li>
 
       <li className="nav-item" style={{ padding: "20px" }}>
         <button className="btn btn-danger"
