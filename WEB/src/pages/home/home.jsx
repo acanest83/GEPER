@@ -36,7 +36,7 @@ function Home() {
 
   return (
     <div className="container mt-4 position-relative">
-      <h1 style={{ color: "Tan", fontWeight: "bold" }}>Work Space</h1>
+      <h1 style={{ color: "Tan", fontWeight: "bold" }}>Welcome to your Work Space!</h1>
       <>
         <div>
           <h2
