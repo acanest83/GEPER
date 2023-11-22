@@ -140,7 +140,7 @@ function Create() {
 
                     {/* Information */}
                     <div className="mb-3">
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Name</label>
+                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"5px"}}>Name</label>
                         <input
                             type="text"
                             className="form-control"
@@ -150,7 +150,7 @@ function Create() {
                             style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required
                         />
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Surname</label>
+                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Surname</label>
                         <input
                             type="text"
                             className="form-control"
@@ -161,7 +161,7 @@ function Create() {
                             required
 
                         />
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>TIM</label>
+                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>TIM</label>
                         <input
                             type="text"
                             className="form-control"
@@ -170,7 +170,7 @@ function Create() {
                             placeholder="tim"
                             style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required />
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Telephone Number</label>
+                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Telephone Number</label>
                         <input
                             type="text"
                             className="form-control"
@@ -179,13 +179,13 @@ function Create() {
                             placeholder="telephone"
                             style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required />
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Rank</label>
+                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Rank</label>
                         <select
                             className="form-select"
                             id="validationDefault04"
                             value={rank}
                             onChange={(e) => setRank(e.target.value)}
-                            style={{ borderColor: "#808000", borderWidth: "3px" }}
+                            style={{ borderColor: "#808000", borderWidth: "3px"}}
                             required
                         >
                             <option selected disabled value="">Ninguno</option>
@@ -201,7 +201,7 @@ function Create() {
                             <option>Cabo</option>
                             <option>Soldado</option>
                         </select>
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Email</label>
+                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Email</label>
                         <input
                             type="text"
                             className="form-control"

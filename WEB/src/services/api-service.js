@@ -68,7 +68,34 @@ export function getApprovedRequests() {
       throw error;
     });
 }
-
+//Exportar Denied//
+export function formDenied(formId, action, comments) {
+  return service
+    .put(`/requests/${formId}/denied`, {
+      action,
+      comments,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+}
+//Obtener Denied//
+export function getDeniedRequests() {
+  return service.get('/requests/denied')
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+}
+//Delete Request//
+export function deleteRequest (formId) {
+  return service.delete(`/requests/${formId}/delete`)
+  .then ((response) => response.data)
+  .catch ((error) => {
+    throw error;
+  });
+}
 
 
 

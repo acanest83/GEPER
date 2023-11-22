@@ -4,7 +4,7 @@ function Profile() {
   const [hover, setHover] = useState(false);
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '1000px' }}>
-      <div className="card" style={{ width: '400px', border: "8px solid #808000" }}>
+      <div className="card" style={{ width: '400px', border: "8px solid #808000",background:"black" }}>
         <div className="card-body text-center">
           <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold" }}>Profile</h5>
           <form className="row g-3">
@@ -146,7 +146,8 @@ function Profile() {
                   backgroundColor: hover ? "black" : "olive",
                   color: hover ? "white" : "white",
                   fontWeight: "bold",
-                  transition: "background-color 0.3s"
+                  transition: "background-color 0.3s",
+                  marginTop: "20px"
                 }}
                 onMouseOver={() => setHover(true)}
                 onMouseOut={() => setHover(false)}

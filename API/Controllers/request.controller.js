@@ -28,6 +28,9 @@ module.exports.denied = (req, res, next) => {
     const requestId = req.params.id;
     const comments = req.body.comments;
 
+    console.log('Request ID:', requestId);
+    console.log('Comments:', comments);
+
     Request.findByIdAndUpdate(requestId, { status: "Denied", comments }, { new: true })
         .then((request) => res.status(201).json(request))
         .catch((error) => next(error));
@@ -58,3 +61,13 @@ module.exports.listPending = (req, res, next) => {
         })
         .catch((error) => next(error));
 }
+module.exports.listDenied = (req, res, next) => {
+    Request.find({ status: "Denied" })
+        .then((requests) => res.status(200).json(requests))
+        .catch((error) => next(error));
+};
+module.exports.deleteRequest = (req, res, next) => {
+    Request.findByIdAndDelete(req.params.id)
+        .then(() => res.status(204).end())
+        .catch((error) => next(error));
+};

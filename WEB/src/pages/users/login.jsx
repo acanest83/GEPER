@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { login } from "../../services/api-service";
 import { useAuthContext } from "../../contexts/auth-context";
-import { Link } from "react-router-dom";
-import {Navigate} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -21,64 +20,92 @@ function Login() {
     }
     setError('');
 
-    login({ email, password }).then((response) => {
-      onLogin(response);
-      setLoginSuccess(true); 
-    });
+    login({ email, password })
+      .then((response) => {
+        onLogin(response);
+        setLoginSuccess(true);
+      })
+      .catch((error) => {
+        setError('Invalid email or password. Please try again.');
+      });
   };
 
   if (loginSuccess) {
-    return  <Navigate to="/home"/>
+    return <Navigate to="/home" />;
   }
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ height: "1000px", borderRadius: "10px" }}>
-      <div className="card" style={{ width: "400px", height: "300px", border: "8px solid #808000",backgroundColor:"black" }}>
+    <div className="d-flex align-items-center justify-content-center" style={{ height: "900px" }}>
+      <div className="card" style={{
+        width: "400px",
+        height: "500px",
+        border: "7px solid  #808000",
+        borderRadius: "8px",
+        backgroundColor: "black"
+      }}
+      >
         <div className="card-body">
-          <h5 className="card-title mb-3" style={{ color: "#808000", fontWeight: "bold" }}>Login</h5>
-          <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} >
-            <div className="col-12 mb-3">
-              <label htmlFor="staticEmail2" className="visually-hidden">Email</label>
+          <h5
+            className="card-title mb-4"
+            style={{ color: " #808000", fontWeight: "bold", textAlign: "center", fontSize: "30px" }}
+          >
+            Login
+          </h5>
+
+          <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
+            <div className="mb-3">
+              <label
+                htmlFor="email"
+                className="form-label"
+                style={{ color: "#808000", fontSize: "20px", fontWeight: "bold" }}
+              >
+                Email
+              </label>
+
               <input
                 type="email"
                 className="form-control"
-                id="staticEmail2"
-                placeholder="Email"
-                style={{ borderColor: "#808000", borderWidth: "3px" }}
+                id="email"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={{ borderColor: "#808000" }}
               />
             </div>
 
-            <div className="col-12 mb-3">
-              <label htmlFor="inputPassword2" className="visually-hidden">Password</label>
+            <div className="mb-3">
+              <label
+                htmlFor="password"
+                className="form-label"
+                style={{ color: "#808000", fontSize: "20px", fontWeight: "bold" }}
+              >
+                Password
+              </label>
+
               <input
                 type="password"
                 className="form-control"
-                id="inputPassword2"
-                placeholder="Password"
-                style={{ borderColor: "#808000", borderWidth: "3px" }}
+                id="password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{ borderColor: "#808000" }}
               />
             </div>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{ color: 'red', marginBottom: '20px' }}>{error}</p>}
 
-            <div className="col-12 mb-3 d-flex justify-content-between">
+            <div className="d-grid gap-2" style={{marginTop: "50px"}}>
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn"
                 style={{
-                  borderColor: "#808000",
-                  borderWidth: "3px",
-                  height: "60px",
-                  backgroundColor: hoverAccess ? "black" : "olive",
-                  color: hoverAccess ? "white" : "white",
+                  backgroundColor: hoverAccess ? "Peru" : " #808000",
+                  color: "white",
                   fontWeight: "bold",
-                  textAlign: "center",
-                  marginTop: "15px",
-                  transition: "background-color 0.3s"
+                  transition: "background-color 0.3s",
+                  fontSize: "20px",
+                  marginTop: "-15px"
                 }}
                 onMouseOver={() => setHoverAccess(true)}
                 onMouseOut={() => setHoverAccess(false)}
@@ -86,20 +113,20 @@ function Login() {
                 Access
               </button>
 
+              <h5 style={{color:"#808000", marginTop:"45px", textAlign:"center"}}>
+                Can't get through? Create an account
+              </h5>
+
               <Link
                 to="/register"
-                className="btn btn-primary mb-3"
+                className="btn btn-"
                 style={{
-                  borderColor: "#808000",
-                  borderWidth: "3px",
-                  height: "60px",
-                  backgroundColor: hoverSignUp ? "black" : "olive",
-                  color: hoverSignUp ? "white" : "white",
+                  backgroundColor: hoverSignUp ? "Peru" : "#808000",
+                  color: "white",
                   fontWeight: "bold",
-                  textAlign: "center",
-                  lineHeight: "38px",
-                  marginTop: "15px",
-                  transition: "background-color 0.3s"
+                  transition: "background-color 0.3s",
+                  fontSize: "20px", 
+                  marginTop: "-5px",
                 }}
                 onMouseOver={() => setHoverSignUp(true)}
                 onMouseOut={() => setHoverSignUp(false)}

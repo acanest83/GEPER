@@ -4,6 +4,7 @@ import List from "./pages/requests/list";
 import PendingList from "./pages/requests/pending_List";
 import Create from "./pages/requests/create";
 import ApprovedList from "./pages/requests/approved_List";
+import Delete from "./pages/requests/approved_List";
 import Register from "./pages/users/register";
 import Login from "./pages/users/login";
 import Profile from "./pages/users/view_Profile";
@@ -20,9 +21,10 @@ function App() {
         <Routes>
           {/* REQUESTS */}
           <Route path="/requests" element={<List />} />
-          <Route path="/requests/pending" element={<PendingList />} />
-          <Route path="/requests/create" element={<Create />} />
-          <Route path="/requests/approved" element={<ApprovedList />} />
+          <Route path="/requests/pending" element={<PendingList />}/>
+          <Route path="/requests/create" element={<Create />}/>
+          <Route path="/requests/approved" element={<ApprovedList />}/>
+          <Route path= "/requests/:id/delete" element={<Delete/>}/>
 
           {/* USERS */}
           <Route path="/register" element={<Register />} />

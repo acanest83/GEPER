@@ -18,6 +18,8 @@ router.put("/requests/:id/denied", requests.denied);
 router.put("/requests/:id/cancel", requests.cancel);
 router.get("/requests/approved", requests.listApproved);
 router.get("/requests/pending", requests.listPending);
+router.get("/requests/denied", requests.listDenied);
+router.delete("/requests/:id/delete", requests.deleteRequest);
 
 //USERS ROUTES//
 router.post('/register', users.create);
