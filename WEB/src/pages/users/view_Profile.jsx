@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faUserCircle,faIdCard,faMobile,faBars,faEnvelope,faLock } from '@fortawesome/free-solid-svg-icons';
 function Profile() {
   const [hover, setHover] = useState(false);
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '1000px' }}>
-      <div className="card" style={{ width: '400px', border: "8px solid #808000",background:"black" }}>
+      <div className="card" style={{ width: '400px', border: "8px solid #808000", background: "black" }}>
         <div className="card-body text-center">
-          <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold" }}>Profile</h5>
+          <h5
+            className="card-title"
+            style={{ color: "#808000", fontWeight: "bold" }}
+          >
+            <FontAwesomeIcon icon={faUserCircle} style={{ margin: 'auto', display: 'block', fontSize: "80px", color: "#808000" }} />
+            Profile
+          </h5>
           <form className="row g-3">
-            <div className="col-md-12 d-flex align-items-center justify-content-center">
-              <label
-                htmlFor="formFile"
-                className="form-label"
-                style={{ color: "#808000", fontWeight: "bold" }}
-              >
-                Avatar
-              </label>
-              <img src="url_de_la_imagen" alt="" className="img-fluid" />
+            <div
+              className="col-md-12 d-flex align-items-center justify-content-center"
+            >
+
             </div>
             <div className="col-md-6">
               <label
@@ -24,6 +26,7 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Name
               </label>
               <input
@@ -39,6 +42,7 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Surname
               </label>
               <input
@@ -54,6 +58,7 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Email
               </label>
               <div className="input-group">
@@ -73,6 +78,7 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faIdCard} style={{ marginRight: '10px', fontSize: "20px" }} />
                 TIM
               </label>
               <input
@@ -89,6 +95,7 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faBars} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Rank
               </label>
               <select className="form-select" id="validationDefault04" required>
@@ -112,7 +119,8 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
-                Telephone Number
+              <FontAwesomeIcon icon={faMobile} style={{ marginRight: '10px', fontSize: "20px" }} />
+                Telephone
               </label>
               <input
                 type="tel"
@@ -127,6 +135,7 @@ function Profile() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faLock} style={{ marginRight: '10px' }} />
                 Password
               </label>
               <input

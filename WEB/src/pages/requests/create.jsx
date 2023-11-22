@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { sendRequest } from '../../services/api-service';
 import { Navigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faIdCard, faMobile, faBars, faEnvelope, faExclamation, faFile, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -23,7 +25,7 @@ function Create() {
     const [email, setEmail] = useState('');
     const [requestSuccess, setRequestSuccess] = useState(false);
     const [requestCancel, setRequestCancel] = useState(false);
-    
+
 
     const [hoverOrder, setHoverOrder] = useState(false);
     const [hoverCancel, setHoverCancel] = useState(false);
@@ -51,7 +53,7 @@ function Create() {
         setReason(e.target.value);
         console.log('Reason:', e.target.value);
         console.log('State: ', reason);
-        
+
         setFlexibility(false);
         setChildUnder3(false);
         setChildUnder8(false);
@@ -117,13 +119,19 @@ function Create() {
     }
 
     return (
-        <div className="card" style={{ borderColor: "#808000", borderWidth: "5px",marginTop: "150px"}}>
+        <div className="card" style={{ borderColor: "#808000", borderWidth: "5px", marginTop: "150px" }}>
             <div className="card-body" style={{ backgroundColor: "black" }}>
                 <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold", fontSize: "30px" }}>Leave Request</h5>
                 <form onSubmit={handleSubmit}>
                     {/* Request Type */}
                     <div className="mb-3">
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Request Type</label>
+                        <label 
+                        className="form-label" 
+                        style={{ color: "#808000", fontWeight: "bold",marginTop:"10px" }}
+                        >
+                        <FontAwesomeIcon icon={faFile} style={{ marginRight: '10px', fontSize: "20px" }} />
+                        Request Type
+                        </label>
                         <select
                             className="form-select"
                             onChange={handleRequestTypeChange}
@@ -140,7 +148,13 @@ function Create() {
 
                     {/* Information */}
                     <div className="mb-3">
-                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"5px"}}>Name</label>
+                        <label
+                            className="form-label"
+                            style={{ color: "#808000", fontWeight: "bold", marginTop: "5px" }}
+                        >
+                            <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
+                            Name
+                        </label>
                         <input
                             type="text"
                             className="form-control"
@@ -150,7 +164,13 @@ function Create() {
                             style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required
                         />
-                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Surname</label>
+                        <label
+                            className="form-label"
+                            style={{ color: "#808000", fontWeight: "bold", marginTop: "15px"}}
+                        >
+                            <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
+                            Surname
+                        </label>
                         <input
                             type="text"
                             className="form-control"
@@ -161,7 +181,13 @@ function Create() {
                             required
 
                         />
-                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>TIM</label>
+                        <label
+                            className="form-label"
+                            style={{ color: "#808000", fontWeight: "bold", marginTop: "15px" }}
+                        >
+                            <FontAwesomeIcon icon={faIdCard} style={{ marginRight: '10px', fontSize: "20px" }} />
+                            TIM
+                        </label>
                         <input
                             type="text"
                             className="form-control"
@@ -170,7 +196,13 @@ function Create() {
                             placeholder="tim"
                             style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required />
-                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Telephone Number</label>
+                        <label 
+                        className="form-label"
+                         style={{ color: "#808000", fontWeight: "bold", marginTop: "15px" }}
+                         >
+                         <FontAwesomeIcon icon={faMobile} style={{ marginRight: '10px', fontSize: "20px" }} />
+                         Telephone Number
+                         </label>
                         <input
                             type="text"
                             className="form-control"
@@ -179,13 +211,19 @@ function Create() {
                             placeholder="telephone"
                             style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required />
-                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Rank</label>
+                        <label 
+                        className="form-label"
+                         style={{ color: "#808000", fontWeight: "bold", marginTop: "15px" }}
+                         >
+                         <FontAwesomeIcon icon={faBars} style={{ marginRight: '10px', fontSize: "20px" }} />
+                         Rank
+                         </label>
                         <select
                             className="form-select"
                             id="validationDefault04"
                             value={rank}
                             onChange={(e) => setRank(e.target.value)}
-                            style={{ borderColor: "#808000", borderWidth: "3px"}}
+                            style={{ borderColor: "#808000", borderWidth: "3px" }}
                             required
                         >
                             <option selected disabled value="">Ninguno</option>
@@ -201,7 +239,13 @@ function Create() {
                             <option>Cabo</option>
                             <option>Soldado</option>
                         </select>
-                        <label className="form-label" style={{color: "#808000",fontWeight: "bold",marginTop:"10px"}}>Email</label>
+                        <label 
+                        className="form-label"
+                         style={{ color: "#808000", fontWeight: "bold", marginTop: "15px" }}
+                         >
+                         <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '10px', fontSize: "20px" }} />
+                         Email
+                         </label>
                         <input
                             type="text"
                             className="form-control"
@@ -215,7 +259,13 @@ function Create() {
 
                     {/* Reasons */}
                     <div className="mb-3">
-                        <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Reasons</label>
+                        <label 
+                        className="form-label"
+                         style={{ color: "#808000", fontWeight: "bold" }}
+                         >
+                         <FontAwesomeIcon icon={faExclamation} style={{ marginRight: '10px', fontSize: "20px" }} />
+                         Reasons
+                         </label>
 
                         {/* Holidays & Leave Reasons */}
                         {requestType === 'Holidays and Leave' && (
@@ -233,7 +283,7 @@ function Create() {
                                         htmlFor="official"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                       Own Affairs
+                                        Own Affairs
                                     </label>
                                 </div>
                                 <div className="form-check">
@@ -281,7 +331,7 @@ function Create() {
                                         htmlFor="official4"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                       Day by Preparation
+                                        Day by Preparation
                                     </label>
 
                                 </div>
@@ -304,7 +354,7 @@ function Create() {
                                         htmlFor="contingency"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                       Common Contingency
+                                        Common Contingency
                                     </label>
                                 </div>
 
@@ -322,7 +372,7 @@ function Create() {
                                         htmlFor="contingency"
                                         style={{ color: "#808000", fontWeight: "bold" }}
                                     >
-                                       Occupational Contingency
+                                        Occupational Contingency
                                     </label>
                                 </div>
 
@@ -343,7 +393,7 @@ function Create() {
                                         Continuity of Sick Leave
                                     </label>
                                 </div>
-                                
+
                                 <div className="form-check">
                                     <input type="radio"
                                         className="form-check-input"
@@ -443,7 +493,13 @@ function Create() {
                     {/* Periodos */}
                     {reason && (
                         <div className="mb-3">
-                            <label className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>Periods</label>
+                            <label 
+                            className="form-label"
+                             style={{ color: "#808000", fontWeight: "bold" }}
+                             >
+                              <FontAwesomeIcon icon={faCalendarDays} style={{ marginRight: '10px', fontSize: "20px" }} />
+                             Periods
+                             </label>
                             <div className="row">
                                 <div className="col">
                                     <input type="date"

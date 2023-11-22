@@ -3,6 +3,8 @@ import { logoutApi } from "../services/api-service";
 import { Navigate } from "react-router-dom";
 import { useAuthContext } from '../contexts/auth-context';
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 function NavBar() {
   const [outSuccess, setOutSuccess] = useState(false);
@@ -42,7 +44,7 @@ function NavBar() {
 
       <span style={{ fontSize: "30px", color: "#808000", marginTop: "20px" }}>
         <strong>GEPER</strong> | {user && (
-          <Link to="/profile" style={{ color:"#808000"}}>{user.email}</Link>
+          <Link to="/profile" style={{ color: "#808000" }}>{user.email}</Link>
         )}
       </span>
 
@@ -84,7 +86,16 @@ function NavBar() {
       <div style={{ padding: "20px", marginTop: "10px" }}>
         {user && (
           <button className="btn btn-danger"
-            style={{ width: "90px", height: "45px", fontSize: "20px", fontWeight: "bold" }} onClick={() => handleLogout()}>
+            style={{
+              display:"flex",
+              width: "125px",
+              height: "45px",
+              fontSize: "20px",
+              fontWeight: "bold"
+            }}
+            onClick={() => handleLogout()}
+          >
+            <FontAwesomeIcon icon={faSignOut} style={{ fontSize: '20px', color: 'white', marginRight: '1px',padding:"5px"}}/>
             Logout
           </button>
         )}

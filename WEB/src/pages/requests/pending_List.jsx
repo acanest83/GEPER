@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { formRequest, formApproved, formDenied } from '../../services/api-service';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faIdCard, faMobile, faBars, faEnvelope, faExclamation, faFile, faCalendarCheck, faCalendarTimes, faComment } from '@fortawesome/free-solid-svg-icons';
 function formatDate(dateString) {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -78,6 +79,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faFile} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Request Type:
                     </label>
                     <input
@@ -91,6 +93,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Name:
                     </label>
                     <input
@@ -106,6 +109,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Surname:
                     </label>
                     <input
@@ -119,6 +123,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faIdCard} style={{ marginRight: '10px', fontSize: "20px" }} />
                       TIM:
                     </label>
                     <input
@@ -132,6 +137,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faMobile} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Telephone:
                     </label>
                     <input
@@ -145,6 +151,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faBars} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Email:
                     </label>
                     <input
@@ -158,6 +165,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faExclamation} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Reasons:
                     </label>
                     <input
@@ -171,6 +179,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                    <FontAwesomeIcon icon={faCalendarCheck} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Period From:
                     </label>
                     <input
@@ -184,6 +193,7 @@ function PendingList() {
                       className="form-label"
                       style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
                     >
+                     <FontAwesomeIcon icon={faCalendarTimes} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Period To:
                     </label>
                     <input
@@ -196,7 +206,11 @@ function PendingList() {
                   </div>
 
                   <div className="mb-3">
-                    <label className="form-label"  style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}>
+                    <label 
+                    className="form-label"
+                      style={{color: "#808000", fontWeight: "bold",marginTop:"10px"}}
+                      >
+                       <FontAwesomeIcon icon={faComment} style={{ marginRight: '10px', fontSize: "20px" }} />
                       Comments:
                     </label>
                     <textarea

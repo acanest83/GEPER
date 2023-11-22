@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { goHome } from "../../services/api-service";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
   const [data, setData] = useState({ pendingRequests: [], allUsers: [] });
@@ -90,13 +92,13 @@ function Home() {
           className="btn btn-primary position-absolute top-0 end-0 mt-4"
           style={{
             width: "200px",
-            height:"50px",
+            height: "50px",
             borderColor: "#808000",
             borderWidth: "3px",
             backgroundColor: hoverHome ? "olive" : "black",
             color: hoverHome ? "White" : "Tan",
             fontWeight: "bold",
-            fontSize:"20px",
+            fontSize: "20px",
             transition: "background-color 0.3s",
           }}
           onMouseOver={() => setHoverHome(true)}

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { login } from "../../services/api-service";
 import { useAuthContext } from "../../contexts/auth-context";
 import { Link, Navigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -35,16 +37,22 @@ function Login() {
   }
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ height: "900px" }}>
+    <div className="d-flex align-items-center justify-content-center" style={{ height: "1000px" }}>
       <div className="card" style={{
         width: "400px",
-        height: "500px",
+        height: "650px",
         border: "7px solid  #808000",
         borderRadius: "8px",
         backgroundColor: "black"
       }}
       >
         <div className="card-body">
+          <h1 style={{ textAlign: 'center', marginTop: '50px' }}>
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              style={{ margin: 'auto', display: 'block', fontSize: "80px", color: "#808000" }}
+            />
+          </h1>
           <h5
             className="card-title mb-4"
             style={{ color: " #808000", fontWeight: "bold", textAlign: "center", fontSize: "30px" }}
@@ -59,6 +67,7 @@ function Login() {
                 className="form-label"
                 style={{ color: "#808000", fontSize: "20px", fontWeight: "bold" }}
               >
+                <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '10px' }} />
                 Email
               </label>
 
@@ -79,6 +88,7 @@ function Login() {
                 className="form-label"
                 style={{ color: "#808000", fontSize: "20px", fontWeight: "bold" }}
               >
+                <FontAwesomeIcon icon={faLock} style={{ marginRight: '10px' }} />
                 Password
               </label>
 
@@ -95,7 +105,7 @@ function Login() {
 
             {error && <p style={{ color: 'red', marginBottom: '20px' }}>{error}</p>}
 
-            <div className="d-grid gap-2" style={{marginTop: "50px"}}>
+            <div className="d-grid gap-2" style={{ marginTop: "50px" }}>
               <button
                 type="submit"
                 className="btn btn"
@@ -113,7 +123,7 @@ function Login() {
                 Access
               </button>
 
-              <h5 style={{color:"#808000", marginTop:"45px", textAlign:"center"}}>
+              <h5 style={{ color: "#808000", marginTop: "45px", textAlign: "center" }}>
                 Can't get through? Create an account
               </h5>
 
@@ -125,7 +135,7 @@ function Login() {
                   color: "white",
                   fontWeight: "bold",
                   transition: "background-color 0.3s",
-                  fontSize: "20px", 
+                  fontSize: "20px",
                   marginTop: "-5px",
                 }}
                 onMouseOver={() => setHoverSignUp(true)}

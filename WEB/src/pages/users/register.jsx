@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { createUser } from '../../services/api-service';
 import { Navigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faUserCircle, faIdCard, faMobile, faBars, faEnvelope, faLock, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 
 function Register() {
   const [hover, setHover] = useState(false);
@@ -47,17 +49,22 @@ function Register() {
   };
 
   if (registrationSuccess) {
-    return  <Navigate to="/login"/>
+    return <Navigate to="/login" />
   }
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ height: '1000px' }}>
-      <div className="card common-form" style={{ width: '800px', border: "8px solid #808000",backgroundColor:"black"}}>
+      <div className="card common-form" style={{ width: '800px', border: "8px solid #808000", backgroundColor: "black" }}>
         <div className="card-body">
-          <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold",fontSize:"30px" }}>Register</h5>
-          <form className="row g-3" onSubmit={handleSubmit} style={{ marginTop: '15px'}}>
+          <h5 className="card-title" style={{ color: "#808000", fontWeight: "bold", fontSize: "30px" }}>Register</h5>
+          <form className="row g-3" onSubmit={handleSubmit} style={{ marginTop: '15px' }}>
             <div className="col-md-6">
-              <label htmlFor="validationDefault01" className="form-label" style={{ color: "#808000", fontWeight: "bold"}}>
+              <label
+                htmlFor="validationDefault01"
+                className="form-label"
+                style={{ color: "#808000", fontWeight: "bold" }}
+              >
+                <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Name
               </label>
               <input
@@ -73,7 +80,12 @@ function Register() {
               />
             </div>
             <div className="col-md-6">
-              <label htmlFor="validationDefault02" className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>
+              <label
+                htmlFor="validationDefault02"
+                className="form-label"
+                style={{ color: "#808000", fontWeight: "bold" }}
+              >
+                <FontAwesomeIcon icon={faUser} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Surname
               </label>
               <input
@@ -94,6 +106,7 @@ function Register() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+                <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Email
               </label>
               <div className="input-group">
@@ -120,6 +133,7 @@ function Register() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+                <FontAwesomeIcon icon={faIdCard} style={{ marginRight: '10px', fontSize: "20px" }} />
                 TIM
               </label>
               <input
@@ -135,7 +149,12 @@ function Register() {
               />
             </div>
             <div className="col-md-6">
-              <label htmlFor="validationDefault04" className="form-label" style={{ color: "#808000", fontWeight: "bold" }}>
+              <label
+                htmlFor="validationDefault04"
+                className="form-label"
+                style={{ color: "#808000", fontWeight: "bold" }}
+              >
+                <FontAwesomeIcon icon={faBars} style={{ marginRight: '10px', fontSize: "20px" }} />
                 Rank
               </label>
               <select
@@ -169,7 +188,8 @@ function Register() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
-                Telephone Number
+              <FontAwesomeIcon icon={faMobile} style={{ marginRight: '10px', fontSize: "20px" }} />
+                Telephone
               </label>
               <input
                 type="tel"
@@ -189,6 +209,7 @@ function Register() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faLock} style={{ marginRight: '10px' }} />
                 Password
               </label>
               <input
@@ -208,6 +229,7 @@ function Register() {
                 className="form-label"
                 style={{ color: "#808000", fontWeight: "bold" }}
               >
+              <FontAwesomeIcon icon={faCameraRetro} style={{ marginRight: '10px' }} />
                 Avatar
               </label>
               <input
@@ -230,7 +252,7 @@ function Register() {
                   color: hover ? "white" : "white",
                   fontWeight: "bold",
                   transition: "background-color 0.3s",
-                  marginTop:"25px",
+                  marginTop: "25px",
                 }}
                 onMouseOver={() => setHover(true)}
                 onMouseOut={() => setHover(false)}
